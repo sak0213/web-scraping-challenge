@@ -1,6 +1,5 @@
 def updatePage():
     from bs4 import BeautifulSoup as bs
-    import requests
     from splinter import Browser
     from webdriver_manager.chrome import ChromeDriverManager
     import pandas as pd
@@ -53,7 +52,7 @@ def updatePage():
     new_header = df.iloc[0]
     df = df[1:]
     df.columns = new_header
-    df = df[["Mars - Earth Comparison","Mars","Earth"]]
+    df = df.set_index("Mars - Earth Comparison")
     df
 
     ######## Find  #############
@@ -101,5 +100,6 @@ def updatePage():
     client = pymongo.MongoClient(conn)
     db = client.Mars_Data
     Scrape_Results = db.Scrape_Results
+    db.Scrape_Results.drop()
     Scrape_Results.insert_one(mars_dictionary)
-
+updatePage()
