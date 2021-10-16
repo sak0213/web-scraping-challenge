@@ -102,4 +102,4 @@ def updatePage():
     Scrape_Results = db.Scrape_Results
     db.Scrape_Results.drop()
     Scrape_Results.insert_one(mars_dictionary)
-updatePage()
+

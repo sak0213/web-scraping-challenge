@@ -7,15 +7,56 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mars Data</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-  <div class="container text-center">
-    <h1 class="jumbotron">Mars Data</h1>
-  </div>
-  <div>
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+  <div clas="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      
+    <div class="row">
+      <div class="col-md-12 col-md-offset-1">
+        <h3>Latest Mars News</h3>
+        <h4>{{Scrape_Results.news.headline}}</h4>
+        <p>{{Scrape_Results.news.description}}</p>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-6 col-md-offset-1">
+        <h3>Featured Mars Image</h3>
+        <img src={{Scrape_Results.featured_photo}} class="img-responsive img-rounded" alt="Mars Image">
+      </div>
+      <div class="col-md-3">
+        <div>
+          {{Scrape_Results.data | safe}}
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="padding-top: 25px; margin-top: 25px; text-align: center;">Mars Hemispheres</h3>
+    <div class="card-deck">
+        <hr>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+                {% for image in Scrape_Results.hemispheres %}
+                <div class="col-md-6">
+                    <div class="card text-white bg-dark" style="margin: 30px; border: 2px solid rgb(70, 70, 70); padding: 5px; border-radius: 6px;">
+                        <img class="card-img-top img-responsive img-rounded" src="{{ image.link }}" />
+                        <div class="card-body">
+                            <p class="card-text" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color: rgb(34, 34, 34);">{{ image.name }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>    
   </div>
 </body>
-
 </html>
