@@ -1,5 +1,4 @@
-from flask import Flask, json, jsonify, render_template
-from flask.wrappers import Response
+from flask import Flask, render_template, redirect
 import pymongo
 from mission_to_mars import updatePage
 
@@ -15,7 +14,8 @@ Scrape_Results = db.Scrape_Results
 
 @app.route("/")
 def welcome():
-    return render_template("index.html")
+
+    return render_template("index.html", Scrape_Results = db.Scrape_Results.find_one({}))
 
 @app.route('/scrape')
 def scrape():

@@ -22,8 +22,12 @@
     <div class="row">
       <div class="col-md-12 col-md-offset-1">
         <h3>Latest Mars News</h3>
-        <h4>{{Scrape_Results.news.headline}}</h4>
-        <p>{{Scrape_Results.news.description}}</p>
+        <!-- <h4>{{Scrape_Results.news.headline}}</h4>
+        <p>{{Scrape_Results.news.description}}</p> -->
+        {% for news in Scrape_Results.news %}
+          <h4>{{news.headline}}</h4>
+          <p>{{news.description}}</p>
+        {% endfor %}
       </div>
     </div>
 
@@ -33,9 +37,13 @@
         <img src={{Scrape_Results.featured_photo}} class="img-responsive img-rounded" alt="Mars Image">
       </div>
       <div class="col-md-3">
-        <div>
-          {{Scrape_Results.data | safe}}
+        <!-- display table of scraping_results.data -->
+        <div class="row" id="mars-facts">
+          <h4>Mars Facts</h4>
+          <table class="table table-hover">{{ Scrape_Results.data.Mars | safe }}</table>
+
         </div>
+      </div>
       </div>
     </div>
     
@@ -47,10 +55,11 @@
                 {% for image in Scrape_Results.hemispheres %}
                 <div class="col-md-6">
                     <div class="card text-white bg-dark" style="margin: 30px; border: 2px solid rgb(70, 70, 70); padding: 5px; border-radius: 6px;">
-                        <img class="card-img-top img-responsive img-rounded" src="{{ image.link }}" />
+                        <img class="card-img-top img-responsive img-rounded" src="{{ image.img_url }}" />
                         <div class="card-body">
-                            <p class="card-text" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color: rgb(34, 34, 34);">{{ image.name }}</p>
+                            <p class="card-text" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color: rgb(34, 34, 34);">{{ image.title }}</p>
                         </div>
+                    
                     </div>
                 </div>
                 {% endfor %}

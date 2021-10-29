@@ -31,7 +31,7 @@ def updatePage():
     url = "https://spaceimages-mars.com/"
 
     browser.visit(url)
-    time.sleep(0.025)
+    # time.sleep(0.025)
 
     html = browser.html
     soup = bs(html, "html.parser")
@@ -58,7 +58,7 @@ def updatePage():
     ######## Find  #############
     url = "https://marshemispheres.com/"
     browser.visit(url)
-    time.sleep(.025)
+    # time.sleep(.025)
     html = browser.html
     soup = bs(html, "html.parser")
     soupp = soup.find('div', class_='collapsible results')
@@ -83,17 +83,23 @@ def updatePage():
         image_link.append(f'{url}{image_url}')
     browser.quit()    
 
+    news_dict = []
+    for i in range(len(headline)):
+        news_dict.append({
+            "headline": headline[i],
+            "description": description[i]
+        })
+
+    hemisphere_dict = []
+    for i in range(len(picture_description)):
+        hemisphere_dict.append({"title":picture_description[i], "img_url":image_link[i]})
+    print(hemisphere_dict)
+
     mars_dictionary = {
-        "news": {
-            "headline": headline,
-            "description": description
-        },
-        "featured_photo" : photo_link,
+        "news": news_dict,
+        "featured_photo" : f'https://spaceimages-mars.com/{photo_link}',
         "data": df.to_dict(),
-        "hemispheres": {
-            "name": picture_description,
-            "image_link":image_link
-        }
+        "hemispheres": hemisphere_dict
     }
 
     conn = 'mongodb://localhost:27017'
