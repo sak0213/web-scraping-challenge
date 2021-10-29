@@ -96,7 +96,7 @@ def updatePage():
     print(hemisphere_dict)
 
     mars_dictionary = {
-        "news": news_dict,
+        "news": news_dict[:5],
         "featured_photo" : f'https://spaceimages-mars.com/{photo_link}',
         "data": df.to_dict(),
         "hemispheres": hemisphere_dict

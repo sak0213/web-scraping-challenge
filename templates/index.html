@@ -40,7 +40,14 @@
         <!-- display table of scraping_results.data -->
         <div class="row" id="mars-facts">
           <h4>Mars Facts</h4>
-          <table class="table table-hover">{{ Scrape_Results.data.Mars | safe }}</table>
+          <table class="table table-hover">{{ Scrape_Results.data.Mars}}</table>
+          <!-- <table class="table table-hover">
+            {% for data in Scrape_Results.data %}
+              <tr>
+                <td>{{data.Mars}}</td>
+              </tr>
+            {% endfor %}
+          </table> -->
 
         </div>
       </div>
